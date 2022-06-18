@@ -22,15 +22,28 @@ rings = []
 
 for i in range(7) : 
     rings.append(ring(pos = vec(i,0,0), color = colors[i]))
-
+bomb = sphere(color = color.red, radius = 0.15)
+cnt = 0
 while True :
     rate(100)
     move(x)
     scene.camera.pos = x.pos + vec(2,0,0)
     scene.camera.axis = vec(1,0,0)
-    for i in range(len(rings)) : 
+    cnt += 0.01
+    for i in range(7) : 
         if mag(x.pos - rings[i].pos) <= 0.5 : 
             rings[i].color = x.color
         else :
-            rings[i].color = colors[i]
-    
+            rings[i].color = colors[(i+int(cnt))%7]
+    k = keysdown()
+    if ' ' in k :
+        bomb.pos.x += 0.1
+    else : 
+        bomb.pos = x.pos
+        
+        
+        
+        
+        
+        
+        
